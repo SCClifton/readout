@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: builds-different-dashboard
+expected_outcome: |
+  A single file, support-dashboard.html, made from the skill's starter page with its generated
+  style and script unchanged. It leads with one hero number, shows open tickets (27), first reply
+  time against the 4-hour target, a comparison of teams that shows Technical is the one
+  struggling, and a table of the oldest open tickets. All 160 rows of the export are in the page,
+  not retyped or summarised by hand, and every figure is derived by the page. Card titles state
+  findings. No Python or Node is run or installed.
+context:
+  scaffold_script: place-files.sh

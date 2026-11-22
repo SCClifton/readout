@@ -1,0 +1,4 @@
+Readout 1.0.0
+The script embedded in starter.html is assets/readout.js with comments and line breaks removed
+(tools/build.mjs, function minJs). Its SHA-256, base64, is pinned in each page's security policy:
+sha256-QQ98fofXYdu50sKOxbXU9JZvAnq7OhgPeWCe/sSINQc=

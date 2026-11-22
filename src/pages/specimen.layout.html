@@ -1,0 +1,53 @@
+<div class="ro-page">
+  <header data-header></header>
+  <section class="ro-kpis" aria-label="KPI tiles">
+    <div data-kpi="hero"></div>
+    <div data-kpi="flagged"></div>
+    <div data-kpi="worse"></div>
+    <div data-kpi="plain"></div>
+  </section>
+  <section class="ro-grid">
+    <article class="ro-card ro-span-6">
+      <div><h2 class="ro-card-title">Type carries the hierarchy</h2><p class="ro-card-sub">One system face, four weights, eleven sizes</p></div>
+      <div class="ro-stack">
+        <p class="ro-eyebrow">Eyebrow, 12, capitals</p>
+        <p class="ro-h1">Page title, 28 bold</p>
+        <p class="ro-h2">Section heading, 20 semibold</p>
+        <p class="ro-card-title">Card title, 17 semibold</p>
+        <p>Body, 15 regular. Numbers in tables and on axes are tabular: <span class="ro-num">1,284.50</span></p>
+        <p class="ro-card-sub">Label, 13, secondary ink</p>
+        <p class="ro-card-foot">Caption, 11, tertiary ink. The smallest size in the system.</p>
+      </div>
+    </article>
+    <article class="ro-card ro-span-6">
+      <div><h2 class="ro-card-title">Colour is a signal</h2><p class="ro-card-sub">Eight categorical slots in fixed order, and four status levels that always carry a shape and a label</p></div>
+      <svg class="ro-chart" viewBox="0 0 320 44" width="320" height="44" role="img" aria-label="The eight categorical colour slots in order">
+        <rect class="ro-f1" x="0" y="0" width="34" height="24" rx="4"/><rect class="ro-f2" x="40" y="0" width="34" height="24" rx="4"/>
+        <rect class="ro-f3" x="80" y="0" width="34" height="24" rx="4"/><rect class="ro-f4" x="120" y="0" width="34" height="24" rx="4"/>
+        <rect class="ro-f5" x="160" y="0" width="34" height="24" rx="4"/><rect class="ro-f6" x="200" y="0" width="34" height="24" rx="4"/>
+        <rect class="ro-f7" x="240" y="0" width="34" height="24" rx="4"/><rect class="ro-f8" x="280" y="0" width="34" height="24" rx="4"/>
+        <text x="17" y="40" text-anchor="middle">1</text><text x="57" y="40" text-anchor="middle">2</text><text x="97" y="40" text-anchor="middle">3</text><text x="137" y="40" text-anchor="middle">4</text>
+        <text x="177" y="40" text-anchor="middle">5</text><text x="217" y="40" text-anchor="middle">6</text><text x="257" y="40" text-anchor="middle">7</text><text x="297" y="40" text-anchor="middle">8</text>
+      </svg>
+      <div class="ro-row">
+        <span class="ro-chip ro-chip--good"><svg class="ro-ico" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.2a4.8 4.8 0 1 0 0 9.6a4.8 4.8 0 0 0 0-9.6z"/></svg>Good</span>
+        <span class="ro-chip ro-chip--warning"><svg class="ro-ico" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1l5.2 9.6H0.8z"/></svg>Warning</span>
+        <span class="ro-chip ro-chip--serious"><svg class="ro-ico" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 0.6L11.4 6L6 11.4L0.6 6z"/></svg>Serious</span>
+        <span class="ro-chip ro-chip--critical"><svg class="ro-ico" viewBox="0 0 12 12" aria-hidden="true"><path d="M1.6 1.6h8.8v8.8H1.6z"/></svg>Critical</span>
+        <span class="ro-chip">Neutral</span>
+      </div>
+      <p class="ro-callout">A callout holds the one sentence a reader should leave with.</p>
+      <p class="ro-card-note">This card is a custom card: plain markup with documented classes, and hand-written SVG that uses the chart classes.</p>
+    </article>
+    <article data-card="lineBand" class="ro-span-6"></article>
+    <article data-card="lineMulti" class="ro-span-6"></article>
+    <article data-card="bullet" class="ro-span-6"></article>
+    <article data-card="columns" class="ro-span-6"></article>
+    <article data-card="hist" class="ro-span-6"></article>
+    <article data-card="pareto" class="ro-span-6"></article>
+    <article data-card="variance" class="ro-span-6"></article>
+    <article data-card="nothing" class="ro-span-6"></article>
+    <article data-card="table"></article>
+  </section>
+  <footer data-footer></footer>
+</div>

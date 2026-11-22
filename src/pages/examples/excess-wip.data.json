@@ -1,0 +1,616 @@
+{
+ "meta": {
+  "title": "Excess WIP",
+  "eyebrow": "Operations",
+  "subtitle": "Work in progress above target, by stage, age and product family",
+  "asOf": "2026-11-20",
+  "source": "Synthetic data set, seed 7",
+  "marking": "Synthetic data",
+  "locale": "en",
+  "currency": "USD",
+  "views": {
+   "field": "line",
+   "options": ["Line 1","Line 2"],
+   "label": "Line",
+   "all": "All lines"
+  },
+  "switches": ["theme"],
+  "method": [
+   ["Target WIP","Throughput (units per day, trailing 20 working days) multiplied by target cycle time (days). This is Little's Law, rearranged."],
+   ["Excess WIP","WIP above target at each stage on each line. A shortfall at one stage does not offset an excess at another."],
+   ["Target band","Target WIP plus or minus 10 percent."],
+   ["Excess by family","Each stage's excess is shared across its open orders in proportion to quantity."],
+   ["Implied cycle time","Total WIP divided by the throughput of the last stage."],
+   ["Data","Synthetic. Stage names, product families and every figure are invented."]
+  ]
+ },
+ "data": {
+  "stages": {
+   "cols": ["line","stage","wip","throughput","targetCt","unitCost"],
+   "rows": [
+    ["Line 1","Prep",88,62,1.5,120],
+    ["Line 1","Fabricate",187,60,3,310],
+    ["Line 1","Assemble",248,58,4,540],
+    ["Line 1","Integrate",198,57,3,780],
+    ["Line 1","Test",157,56,2.5,860],
+    ["Line 1","Pack",50,56,1,900],
+    ["Line 2","Prep",72,48,1.5,120],
+    ["Line 2","Fabricate",152,47,3,310],
+    ["Line 2","Assemble",224,46,4,540],
+    ["Line 2","Integrate",214,44,3,780],
+    ["Line 2","Test",185,40,2.5,860],
+    ["Line 2","Pack",30,40,1,900]
+   ]
+  },
+  "orders": {
+   "cols": ["id","line","stage","family","qty","ageDays","targetCt","unitCost","excessRate"],
+   "rows": [
+    ["WO-1003","Line 1","Prep","Family D",4,0,1.5,120,0],
+    ["WO-1005","Line 1","Prep","Family A",14,0.5,1.5,120,0],
+    ["WO-1006","Line 1","Prep","Family A",15,1.5,1.5,120,0],
+    ["WO-1007","Line 1","Prep","Family B",20,1,1.5,120,0],
+    ["WO-1008","Line 1","Prep","Family H",10,1,1.5,120,0],
+    ["WO-1009","Line 1","Prep","Family A",9,2.5,1.5,120,0],
+    ["WO-1011","Line 1","Prep","Family E",7,0.5,1.5,120,0],
+    ["WO-1013","Line 1","Prep","Family D",5,2.5,1.5,120,0],
+    ["WO-1015","Line 1","Prep","Family G",4,3.5,1.5,120,0],
+    ["WO-1016","Line 1","Fabricate","Family B",21,0,3,310,0.037433],
+    ["WO-1017","Line 1","Fabricate","Family E",12,0,3,310,0.037433],
+    ["WO-1019","Line 1","Fabricate","Family G",11,1.5,3,310,0.037433],
+    ["WO-1020","Line 1","Fabricate","Family B",18,3,3,310,0.037433],
+    ["WO-1023","Line 1","Fabricate","Family B",6,0.5,3,310,0.037433],
+    ["WO-1025","Line 1","Fabricate","Family A",7,2.5,3,310,0.037433],
+    ["WO-1027","Line 1","Fabricate","Family E",18,6,3,310,0.037433],
+    ["WO-1028","Line 1","Fabricate","Family C",17,6,3,310,0.037433],
+    ["WO-1031","Line 1","Fabricate","Family E",17,5.5,3,310,0.037433],
+    ["WO-1034","Line 1","Fabricate","Family C",16,7,3,310,0.037433],
+    ["WO-1036","Line 1","Fabricate","Family B",21,0,3,310,0.037433],
+    ["WO-1039","Line 1","Fabricate","Family H",19,2,3,310,0.037433],
+    ["WO-1041","Line 1","Fabricate","Family D",4,4,3,310,0.037433],
+    ["WO-1042","Line 1","Assemble","Family A",19,3,4,540,0.064516],
+    ["WO-1045","Line 1","Assemble","Family E",4,0,4,540,0.064516],
+    ["WO-1047","Line 1","Assemble","Family C",17,0,4,540,0.064516],
+    ["WO-1048","Line 1","Assemble","Family H",19,12,4,540,0.064516],
+    ["WO-1050","Line 1","Assemble","Family E",17,5.5,4,540,0.064516],
+    ["WO-1052","Line 1","Assemble","Family C",6,12,4,540,0.064516],
+    ["WO-1053","Line 1","Assemble","Family E",7,2,4,540,0.064516],
+    ["WO-1055","Line 1","Assemble","Family H",22,4.5,4,540,0.064516],
+    ["WO-1058","Line 1","Assemble","Family C",16,4.5,4,540,0.064516],
+    ["WO-1061","Line 1","Assemble","Family F",8,3,4,540,0.064516],
+    ["WO-1063","Line 1","Assemble","Family C",7,3,4,540,0.064516],
+    ["WO-1065","Line 1","Assemble","Family C",7,1,4,540,0.064516],
+    ["WO-1066","Line 1","Assemble","Family A",7,0,4,540,0.064516],
+    ["WO-1069","Line 1","Assemble","Family A",6,7,4,540,0.064516],
+    ["WO-1071","Line 1","Assemble","Family D",7,2,4,540,0.064516],
+    ["WO-1074","Line 1","Assemble","Family D",11,1.5,4,540,0.064516],
+    ["WO-1077","Line 1","Assemble","Family B",20,2.5,4,540,0.064516],
+    ["WO-1079","Line 1","Assemble","Family E",15,1,4,540,0.064516],
+    ["WO-1082","Line 1","Assemble","Family E",5,1,4,540,0.064516],
+    ["WO-1084","Line 1","Assemble","Family G",20,2,4,540,0.064516],
+    ["WO-1086","Line 1","Assemble","Family E",8,1.5,4,540,0.064516],
+    ["WO-1088","Line 1","Integrate","Family B",12,8.5,3,780,0.136364],
+    ["WO-1089","Line 1","Integrate","Family F",11,2,3,780,0.136364],
+    ["WO-1092","Line 1","Integrate","Family C",16,9.5,3,780,0.136364],
+    ["WO-1095","Line 1","Integrate","Family C",13,3.5,3,780,0.136364],
+    ["WO-1098","Line 1","Integrate","Family B",17,0.5,3,780,0.136364],
+    ["WO-1100","Line 1","Integrate","Family B",16,5,3,780,0.136364],
+    ["WO-1103","Line 1","Integrate","Family H",5,3,3,780,0.136364],
+    ["WO-1104","Line 1","Integrate","Family D",10,1,3,780,0.136364],
+    ["WO-1107","Line 1","Integrate","Family H",23,4,3,780,0.136364],
+    ["WO-1108","Line 1","Integrate","Family C",8,9,3,780,0.136364],
+    ["WO-1111","Line 1","Integrate","Family D",12,3.5,3,780,0.136364],
+    ["WO-1113","Line 1","Integrate","Family B",19,2.5,3,780,0.136364],
+    ["WO-1114","Line 1","Integrate","Family D",21,2,3,780,0.136364],
+    ["WO-1116","Line 1","Integrate","Family F",13,2.5,3,780,0.136364],
+    ["WO-1117","Line 1","Integrate","Family B",2,0.5,3,780,0.136364],
+    ["WO-1120","Line 1","Test","Family F",15,1,2.5,860,0.10828],
+    ["WO-1121","Line 1","Test","Family C",15,5,2.5,860,0.10828],
+    ["WO-1124","Line 1","Test","Family B",23,2.5,2.5,860,0.10828],
+    ["WO-1127","Line 1","Test","Family A",23,6.5,2.5,860,0.10828],
+    ["WO-1128","Line 1","Test","Family A",7,3,2.5,860,0.10828],
+    ["WO-1130","Line 1","Test","Family B",23,0.5,2.5,860,0.10828],
+    ["WO-1131","Line 1","Test","Family B",20,3,2.5,860,0.10828],
+    ["WO-1132","Line 1","Test","Family B",24,0,2.5,860,0.10828],
+    ["WO-1133","Line 1","Test","Family C",7,2.5,2.5,860,0.10828],
+    ["WO-1135","Line 1","Pack","Family C",6,0.5,1,900,0],
+    ["WO-1136","Line 1","Pack","Family D",7,1,1,900,0],
+    ["WO-1137","Line 1","Pack","Family D",21,0,1,900,0],
+    ["WO-1140","Line 1","Pack","Family D",16,0,1,900,0],
+    ["WO-1141","Line 2","Prep","Family H",10,0,1.5,120,0],
+    ["WO-1143","Line 2","Prep","Family A",18,0.5,1.5,120,0],
+    ["WO-1146","Line 2","Prep","Family A",14,0.5,1.5,120,0],
+    ["WO-1147","Line 2","Prep","Family A",19,0,1.5,120,0],
+    ["WO-1148","Line 2","Prep","Family G",11,0,1.5,120,0],
+    ["WO-1150","Line 2","Fabricate","Family D",23,1.5,3,310,0.072368],
+    ["WO-1151","Line 2","Fabricate","Family C",7,2,3,310,0.072368],
+    ["WO-1152","Line 2","Fabricate","Family C",19,4.5,3,310,0.072368],
+    ["WO-1155","Line 2","Fabricate","Family B",11,0,3,310,0.072368],
+    ["WO-1157","Line 2","Fabricate","Family E",7,1,3,310,0.072368],
+    ["WO-1160","Line 2","Fabricate","Family D",21,5,3,310,0.072368],
+    ["WO-1163","Line 2","Fabricate","Family D",22,2.5,3,310,0.072368],
+    ["WO-1165","Line 2","Fabricate","Family B",10,1.5,3,310,0.072368],
+    ["WO-1167","Line 2","Fabricate","Family D",9,2,3,310,0.072368],
+    ["WO-1168","Line 2","Fabricate","Family D",12,3,3,310,0.072368],
+    ["WO-1170","Line 2","Fabricate","Family E",11,1.5,3,310,0.072368],
+    ["WO-1172","Line 2","Assemble","Family D",6,3,4,540,0.178571],
+    ["WO-1174","Line 2","Assemble","Family G",17,0.5,4,540,0.178571],
+    ["WO-1177","Line 2","Assemble","Family B",18,3,4,540,0.178571],
+    ["WO-1180","Line 2","Assemble","Family B",24,0.5,4,540,0.178571],
+    ["WO-1181","Line 2","Assemble","Family F",8,2.5,4,540,0.178571],
+    ["WO-1184","Line 2","Assemble","Family A",24,3,4,540,0.178571],
+    ["WO-1185","Line 2","Assemble","Family D",14,1,4,540,0.178571],
+    ["WO-1186","Line 2","Assemble","Family C",20,1,4,540,0.178571],
+    ["WO-1188","Line 2","Assemble","Family G",17,1.5,4,540,0.178571],
+    ["WO-1191","Line 2","Assemble","Family B",10,3,4,540,0.178571],
+    ["WO-1192","Line 2","Assemble","Family C",6,4,4,540,0.178571],
+    ["WO-1195","Line 2","Assemble","Family E",13,4.5,4,540,0.178571],
+    ["WO-1197","Line 2","Assemble","Family E",16,6,4,540,0.178571],
+    ["WO-1199","Line 2","Assemble","Family D",16,4,4,540,0.178571],
+    ["WO-1202","Line 2","Assemble","Family F",15,5,4,540,0.178571],
+    ["WO-1203","Line 2","Integrate","Family A",18,4,3,780,0.383178],
+    ["WO-1206","Line 2","Integrate","Family A",24,1,3,780,0.383178],
+    ["WO-1209","Line 2","Integrate","Family A",19,3,3,780,0.383178],
+    ["WO-1212","Line 2","Integrate","Family C",7,1.5,3,780,0.383178],
+    ["WO-1213","Line 2","Integrate","Family F",10,0.5,3,780,0.383178],
+    ["WO-1214","Line 2","Integrate","Family C",5,0.5,3,780,0.383178],
+    ["WO-1215","Line 2","Integrate","Family G",4,5,3,780,0.383178],
+    ["WO-1217","Line 2","Integrate","Family A",14,12,3,780,0.383178],
+    ["WO-1219","Line 2","Integrate","Family C",20,1.5,3,780,0.383178],
+    ["WO-1222","Line 2","Integrate","Family A",20,3,3,780,0.383178],
+    ["WO-1223","Line 2","Integrate","Family A",16,1,3,780,0.383178],
+    ["WO-1224","Line 2","Integrate","Family A",8,5.5,3,780,0.383178],
+    ["WO-1227","Line 2","Integrate","Family E",6,1.5,3,780,0.383178],
+    ["WO-1230","Line 2","Integrate","Family A",16,5,3,780,0.383178],
+    ["WO-1232","Line 2","Integrate","Family B",8,1,3,780,0.383178],
+    ["WO-1234","Line 2","Integrate","Family A",7,2.5,3,780,0.383178],
+    ["WO-1236","Line 2","Integrate","Family A",4,4,3,780,0.383178],
+    ["WO-1239","Line 2","Integrate","Family E",4,2.5,3,780,0.383178],
+    ["WO-1242","Line 2","Integrate","Family G",4,5,3,780,0.383178],
+    ["WO-1245","Line 2","Test","Family C",11,7,2.5,860,0.459459],
+    ["WO-1248","Line 2","Test","Family A",23,4.5,2.5,860,0.459459],
+    ["WO-1250","Line 2","Test","Family C",10,6,2.5,860,0.459459],
+    ["WO-1252","Line 2","Test","Family A",5,3,2.5,860,0.459459],
+    ["WO-1255","Line 2","Test","Family A",13,4,2.5,860,0.459459],
+    ["WO-1257","Line 2","Test","Family A",4,3,2.5,860,0.459459],
+    ["WO-1258","Line 2","Test","Family C",5,2,2.5,860,0.459459],
+    ["WO-1261","Line 2","Test","Family C",19,6,2.5,860,0.459459],
+    ["WO-1264","Line 2","Test","Family C",14,9,2.5,860,0.459459],
+    ["WO-1266","Line 2","Test","Family E",23,9,2.5,860,0.459459],
+    ["WO-1268","Line 2","Test","Family A",20,2.5,2.5,860,0.459459],
+    ["WO-1271","Line 2","Test","Family A",14,10.5,2.5,860,0.459459],
+    ["WO-1273","Line 2","Test","Family C",19,5,2.5,860,0.459459],
+    ["WO-1274","Line 2","Test","Family C",5,6.5,2.5,860,0.459459],
+    ["WO-1276","Line 2","Pack","Family D",23,0,1,900,0],
+    ["WO-1278","Line 2","Pack","Family G",7,0.5,1,900,0]
+   ]
+  },
+  "trend": {
+   "cols": ["week","line","wip","target","lower","upper","excess"],
+   "rows": [
+    ["2026-05-29","Line 1",890,877.1,789.4,964.8,22.9],
+    ["2026-06-05","Line 1",861,881.5,793.3,969.6,0],
+    ["2026-06-12","Line 1",873,879.8,791.8,967.7,0],
+    ["2026-06-19","Line 1",880,884.3,795.8,972.7,0.1],
+    ["2026-06-26","Line 1",862,884.5,796,972.9,0],
+    ["2026-07-03","Line 1",884,878.8,790.9,966.7,13.6],
+    ["2026-07-10","Line 1",868,884,795.6,972.4,0],
+    ["2026-07-17","Line 1",856,880.4,792.3,968.4,0],
+    ["2026-07-24","Line 1",859,885.7,797.1,974.2,0],
+    ["2026-07-31","Line 1",878,880.9,792.8,968.9,2.1],
+    ["2026-08-07","Line 1",890,885.2,796.7,973.7,13.3],
+    ["2026-08-14","Line 1",848,877.4,789.7,965.2,0],
+    ["2026-08-21","Line 1",858,878.7,790.8,966.5,0],
+    ["2026-08-28","Line 1",853,876.6,788.9,964.2,0],
+    ["2026-09-04","Line 1",885,885.4,796.9,973.9,7],
+    ["2026-09-11","Line 1",879,880.4,792.4,968.4,4.6],
+    ["2026-09-18","Line 1",852,878.9,791,966.7,0],
+    ["2026-09-25","Line 1",881,884.9,796.4,973.3,0.5],
+    ["2026-10-02","Line 1",857,876.2,788.6,963.9,0],
+    ["2026-10-09","Line 1",886,885.3,796.7,973.8,6],
+    ["2026-10-16","Line 1",893,884,795.6,972.4,17.4],
+    ["2026-10-23","Line 1",905,881.3,793.2,969.5,35],
+    ["2026-10-30","Line 1",872,873.7,786.3,961,6.1],
+    ["2026-11-06","Line 1",888,873.5,786.2,960.9,25.3],
+    ["2026-11-13","Line 1",923,872.5,785.3,959.8,67.3],
+    ["2026-11-20","Line 1",928,872,784.8,959.2,67],
+    ["2026-05-29","Line 2",728,710.7,639.7,781.8,42.5],
+    ["2026-06-05","Line 2",706,706.6,636,777.3,27.5],
+    ["2026-06-12","Line 2",727,708.1,637.3,778.9,42],
+    ["2026-06-19","Line 2",723,711.8,640.6,783,28.7],
+    ["2026-06-26","Line 2",699,707.2,636.5,778,18.7],
+    ["2026-07-03","Line 2",732,712.9,641.6,784.2,46],
+    ["2026-07-10","Line 2",713,707.8,637,778.5,26.1],
+    ["2026-07-17","Line 2",702,708.9,638,779.8,11],
+    ["2026-07-24","Line 2",701,707.8,637,778.6,15.5],
+    ["2026-07-31","Line 2",709,710.2,639.2,781.2,26.8],
+    ["2026-08-07","Line 2",730,705.7,635.2,776.3,53.2],
+    ["2026-08-14","Line 2",730,710.8,639.7,781.9,47.2],
+    ["2026-08-21","Line 2",717,711.4,640.3,782.6,33.5],
+    ["2026-08-28","Line 2",727,707.9,637.1,778.6,37.5],
+    ["2026-09-04","Line 2",709,705.6,635,776.2,19.6],
+    ["2026-09-11","Line 2",723,705.8,635.2,776.4,36.5],
+    ["2026-09-18","Line 2",718,703,632.7,773.3,43.6],
+    ["2026-09-25","Line 2",740,699.9,629.9,769.9,70.5],
+    ["2026-10-02","Line 2",740,695.1,625.6,764.6,70.5],
+    ["2026-10-09","Line 2",767,696.7,627.1,766.4,100],
+    ["2026-10-16","Line 2",768,692,622.8,761.2,107.8],
+    ["2026-10-23","Line 2",804,681.1,613,749.2,150.5],
+    ["2026-10-30","Line 2",807,681.1,613,749.2,148.4],
+    ["2026-11-06","Line 2",828,679.7,611.7,747.7,172.9],
+    ["2026-11-13","Line 2",845,673.5,606.1,740.8,207.1],
+    ["2026-11-20","Line 2",877,669,602.1,735.9,218]
+   ]
+  }
+ },
+ "derive": {
+  "stageCalc": {
+   "from": "stages",
+   "where": {
+    "line": "$view"
+   },
+   "add": {
+    "target": ["mul","throughput","targetCt"],
+    "excess": [
+     "pos",
+     ["sub","wip","target"]
+    ],
+    "excessValue": ["mul","excess","unitCost"],
+    "wipValue": ["mul","wip","unitCost"],
+    "lower": ["mul","target",0.9],
+    "upper": ["mul","target",1.1]
+   }
+  },
+  "byStage": {
+   "from": "stageCalc",
+   "group": "stage",
+   "agg": {
+    "wip": ["sum","wip"],
+    "target": ["sum","target"],
+    "lower": ["sum","lower"],
+    "upper": ["sum","upper"],
+    "excess": ["sum","excess"],
+    "excessValue": ["sum","excessValue"],
+    "wipValue": ["sum","wipValue"]
+   }
+  },
+  "byStageLoad": {
+   "from": "byStage",
+   "add": {
+    "load": ["div","wip","target"]
+   }
+  },
+  "output": {
+   "from": "stages",
+   "where": {
+    "line": "$view",
+    "stage": "Pack"
+   }
+  },
+  "trendView": {
+   "from": "trend",
+   "where": {
+    "line": "$view"
+   },
+   "group": "week",
+   "agg": {
+    "wip": ["sum","wip"],
+    "target": ["sum","target"],
+    "lower": ["sum","lower"],
+    "upper": ["sum","upper"],
+    "excess": ["sum","excess"]
+   }
+  },
+  "orderCalc": {
+   "from": "orders",
+   "where": {
+    "line": "$view"
+   },
+   "add": {
+    "ageRatio": ["div","ageDays","targetCt"],
+    "value": ["mul","qty","unitCost"],
+    "excessQty": ["mul","qty","excessRate"],
+    "agedUnits": [
+     "mul",
+     "qty",
+     [
+      "gte",
+      ["div","ageDays","targetCt"],
+      2
+     ]
+    ],
+    "lateUnits": [
+     "mul",
+     "qty",
+     [
+      "gte",
+      ["div","ageDays","targetCt"],
+      1
+     ]
+    ]
+   }
+  },
+  "ageBins": {
+   "from": "orderCalc",
+   "bin": "ageRatio",
+   "step": 0.5,
+   "agg": {
+    "units": ["sum","qty"]
+   }
+  },
+  "byFamily": {
+   "from": "orderCalc",
+   "group": "family",
+   "agg": {
+    "excess": ["sum","excessQty"]
+   },
+   "sort": "-excess",
+   "top": 6
+  }
+ },
+ "facts": {
+  "lateShare": {
+   "value": [
+    "div",
+    ["sum","orderCalc.lateUnits"],
+    ["sum","orderCalc.qty"]
+   ],
+   "format": "pct0"
+  }
+ },
+ "kpis": {
+  "excess": {
+   "label": "Excess WIP",
+   "value": ["sum","byStage.excess"],
+   "format": "int",
+   "unit": "units",
+   "hero": true,
+   "detail": {
+    "value": [
+     "div",
+     ["sum","byStage.excess"],
+     ["sum","byStage.wip"]
+    ],
+    "format": "pct0",
+    "text": "of all WIP"
+   },
+   "delta": {
+    "from": ["prev","trendView.excess"],
+    "label": "vs last week",
+    "good": "down"
+   },
+   "spark": {
+    "data": "trendView",
+    "y": "excess"
+   }
+  },
+  "excessValue": {
+   "label": "Value of excess WIP",
+   "value": ["sum","byStage.excessValue"],
+   "format": "cur0",
+   "detail": {
+    "value": ["sum","byStage.wipValue"],
+    "format": "curCompact",
+    "text": "total WIP value"
+   }
+  },
+  "cycle": {
+   "label": "Implied cycle time",
+   "value": [
+    "div",
+    ["sum","byStage.wip"],
+    ["sum","output.throughput"]
+   ],
+   "format": "dec1",
+   "unit": "days",
+   "delta": {
+    "from": [
+     "div",
+     ["sum","byStage.target"],
+     ["sum","output.throughput"]
+    ],
+    "label": "vs target",
+    "format": "dec1",
+    "good": "down"
+   }
+  },
+  "aged": {
+   "label": "Aged over twice target",
+   "value": ["sum","orderCalc.agedUnits"],
+   "format": "int",
+   "unit": "units",
+   "detail": {
+    "value": [
+     "div",
+     ["sum","orderCalc.agedUnits"],
+     ["sum","orderCalc.qty"]
+    ],
+    "format": "pct0",
+    "text": "of all WIP"
+   }
+  }
+ },
+ "cards": {
+  "byStage": {
+   "title": {
+    "*": "Integrate and Test hold 74% of the excess",
+    "Line 1": "Integrate and Test hold 66% of the excess",
+    "Line 2": "Test and Integrate hold 77% of the excess"
+   },
+   "subtitle": "WIP by stage against target, units",
+   "chart": {
+    "type": "bar",
+    "data": "byStageLoad",
+    "x": "stage",
+    "y": "wip",
+    "target": "target",
+    "band": ["lower","upper"],
+    "format": "int",
+    "unit": "units",
+    "status": {
+     "field": "load",
+     "warning": 1.1,
+     "critical": 1.5,
+     "labels": {
+      "warning": "Above target band",
+      "critical": "More than 1.5 times target"
+     }
+    },
+    "labels": {
+     "wip": "WIP",
+     "target": "Target WIP",
+     "band": "Target band"
+    }
+   }
+  },
+  "trend": {
+   "title": {
+    "*": "WIP has been above the target band for 3 weeks",
+    "Line 1": "WIP is inside or below the target band",
+    "Line 2": "WIP has been above the target band for 7 weeks"
+   },
+   "subtitle": "Total WIP, units, weekly for 26 weeks",
+   "chart": {
+    "type": "line",
+    "data": "trendView",
+    "x": "week",
+    "y": "wip",
+    "band": ["lower","upper"],
+    "xFormat": "day",
+    "format": "int",
+    "unit": "units",
+    "annotate": [
+     {
+      "x": "2026-11-06",
+      "text": "Above band"
+     }
+    ],
+    "labels": {
+     "wip": "WIP",
+     "band": "Target band"
+    }
+   },
+   "note": "The band is target WIP plus or minus 10 percent."
+  },
+  "ageing": {
+   "title": "{lateShare} of WIP has waited longer than its target time",
+   "subtitle": "Units by age in current stage, as a multiple of the stage's target cycle time",
+   "chart": {
+    "type": "histogram",
+    "data": "ageBins",
+    "x": "lo",
+    "y": "units",
+    "xFormat": "dec1",
+    "xUnit": "times target",
+    "format": "int",
+    "unit": "units",
+    "refs": [
+     {
+      "x": 1,
+      "label": "Target"
+     },
+     {
+      "x": 2,
+      "label": "Twice target"
+     }
+    ],
+    "status": {
+     "warning": 1,
+     "critical": 2,
+     "labels": {
+      "warning": "Past target",
+      "critical": "Past twice target"
+     }
+    },
+    "labels": {
+     "units": "WIP"
+    }
+   }
+  },
+  "families": {
+   "title": {
+    "*": "4 of 8 product families hold 82% of the excess",
+    "Line 1": "5 of 8 product families hold 81% of the excess",
+    "Line 2": "4 of 7 product families hold 86% of the excess"
+   },
+   "subtitle": "Excess WIP by product family, units",
+   "chart": {
+    "type": "pareto",
+    "data": "byFamily",
+    "x": "family",
+    "y": "excess",
+    "format": "int",
+    "unit": "units",
+    "labels": {
+     "excess": "Excess WIP",
+     "family": "Product family"
+    }
+   }
+  },
+  "exceptions": {
+   "title": {
+    "*": "The ten most overdue orders have each waited at least 2.8 times their target",
+    "Line 1": "The ten most overdue orders have each waited at least 2.0 times their target",
+    "Line 2": "The ten most overdue orders have each waited at least 1.8 times their target"
+   },
+   "subtitle": "Open work orders ranked by age against the stage's target cycle time",
+   "table": {
+    "data": "orderCalc",
+    "sort": "-ageRatio",
+    "limit": 10,
+    "columns": [
+     {
+      "field": "id",
+      "label": "Work order",
+      "mono": true
+     },
+     {
+      "field": "family",
+      "label": "Product family"
+     },
+     {
+      "field": "line",
+      "label": "Line"
+     },
+     {
+      "field": "stage",
+      "label": "Stage"
+     },
+     {
+      "field": "qty",
+      "label": "Quantity",
+      "format": "int",
+      "unit": "units"
+     },
+     {
+      "field": "ageDays",
+      "label": "Age in stage",
+      "format": "days1"
+     },
+     {
+      "field": "ageRatio",
+      "label": "Age vs target",
+      "format": "x1"
+     },
+     {
+      "field": "ageRatio",
+      "label": "Status",
+      "status": {
+       "warning": 1.5,
+       "critical": 2,
+       "labels": {
+        "warning": "Late",
+        "critical": "Very late",
+        "normal": "On time"
+       }
+      }
+     },
+     {
+      "field": "value",
+      "label": "Value",
+      "format": "cur0"
+     }
+    ]
+   }
+  }
+ }
+}

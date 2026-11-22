@@ -1,0 +1,597 @@
+{
+  "formats": {
+    "int": "1,284",
+    "dec1": "1,284.5",
+    "dec2": "1,284.50",
+    "pct0": "18% (value 0.18)",
+    "pct1": "18.4% (value 0.184)",
+    "cur0": "$1,284 (currency from meta.currency)",
+    "cur2": "$1,284.50",
+    "compact": "1.3K",
+    "curCompact": "$1.3M",
+    "days0": "12 d",
+    "days1": "12.5 d",
+    "x1": "1.4x",
+    "date": "20 Nov 2026 (value 2026-11-20)",
+    "day": "20 Nov",
+    "month": "Nov 2026",
+    "text": "as written"
+  },
+  "objects": {
+    "meta": {
+      "fields": {
+        "title": {
+          "type": "text",
+          "required": true,
+          "doc": "Page title: what this page is about."
+        },
+        "subtitle": {
+          "type": "text",
+          "doc": "One line: scope and period."
+        },
+        "eyebrow": {
+          "type": "text",
+          "doc": "Small label above the title, such as an area or team."
+        },
+        "asOf": {
+          "type": "text",
+          "doc": "When the data was current. ISO date or date-time. Shown on every card."
+        },
+        "source": {
+          "type": "text",
+          "doc": "Where the data came from. Shown on every card."
+        },
+        "marking": {
+          "type": "text",
+          "doc": "Banner text, such as Synthetic data, Draft or Internal."
+        },
+        "locale": {
+          "type": "text",
+          "doc": "Locale for numbers and dates. Default en, which writes Jan 31, 2026. Use en-GB or en-AU for 31 Jan 2026."
+        },
+        "currency": {
+          "type": "text",
+          "doc": "ISO 4217 code for currency formats. Default USD."
+        },
+        "views": {
+          "type": "object:views",
+          "doc": "One page-wide switch over a column."
+        },
+        "switches": {
+          "type": "list:enum:theme|style|density|contrast",
+          "doc": "Viewer controls to show in the header."
+        },
+        "method": {
+          "type": "pairs",
+          "doc": "Rows for the Method panel: [[term, explanation], ...]. Derived columns are added automatically."
+        }
+      }
+    },
+    "views": {
+      "fields": {
+        "field": {
+          "type": "text",
+          "required": true,
+          "doc": "Column the switch filters. A pipeline opts in with where: {column: \"$view\"}."
+        },
+        "options": {
+          "type": "list:text",
+          "required": true,
+          "doc": "Values to offer, in order."
+        },
+        "label": {
+          "type": "text",
+          "doc": "Name of the control, such as Line."
+        },
+        "all": {
+          "type": "text",
+          "doc": "Label for the unfiltered choice. Default All."
+        }
+      }
+    },
+    "table": {
+      "fields": {
+        "cols": {
+          "type": "list:text",
+          "required": true,
+          "doc": "Column names."
+        },
+        "rows": {
+          "type": "rows",
+          "required": true,
+          "doc": "One array per row, values in column order."
+        }
+      }
+    },
+    "derive": {
+      "fields": {
+        "from": {
+          "type": "table",
+          "required": true,
+          "doc": "Source table: a data table or another derived table."
+        },
+        "where": {
+          "type": "where",
+          "doc": "Keep rows where column equals a value, is in a list, or matches \"$view\"."
+        },
+        "add": {
+          "type": "exprs",
+          "doc": "New columns from row arithmetic, such as {\"excess\": [\"pos\", [\"sub\", \"wip\", \"target\"]]}. Operations are listed below."
+        },
+        "group": {
+          "type": "columns",
+          "doc": "One row per distinct value. With no agg, each row gets a count."
+        },
+        "agg": {
+          "type": "aggs",
+          "doc": "Aggregates per group or bin, such as {\"units\": [\"sum\", \"qty\"]}."
+        },
+        "bin": {
+          "type": "column",
+          "doc": "Bin this numeric column. Needs step. Adds bin, lo, hi and count."
+        },
+        "step": {
+          "type": "number",
+          "doc": "Bin width."
+        },
+        "sort": {
+          "type": "text",
+          "doc": "Column to sort by. Prefix with - for descending."
+        },
+        "top": {
+          "type": "number",
+          "doc": "Keep this many rows and fold the rest into one Other row."
+        },
+        "other": {
+          "type": "text",
+          "doc": "Label for the folded row. Default Other."
+        },
+        "cum": {
+          "type": "column",
+          "doc": "Adds running total, share and cumulative share for this column."
+        }
+      }
+    },
+    "fact": {
+      "fields": {
+        "value": {
+          "type": "scalar",
+          "required": true,
+          "doc": "A scalar. first, last, min and max may also pick text or a date, such as the top row's name."
+        },
+        "format": {
+          "type": "format",
+          "doc": "Number format, or date, day or month for a date. Default int."
+        }
+      }
+    },
+    "kpi": {
+      "fields": {
+        "label": {
+          "type": "text",
+          "required": true,
+          "doc": "What the number is. Sentence case, no colon."
+        },
+        "value": {
+          "type": "scalar",
+          "required": true,
+          "doc": "A scalar such as [\"sum\", \"stages.excess\"]."
+        },
+        "format": {
+          "type": "format",
+          "doc": "Number format. Default int."
+        },
+        "unit": {
+          "type": "text",
+          "doc": "Unit shown after the value, such as units or days."
+        },
+        "hero": {
+          "type": "bool",
+          "doc": "The one number the page leads with. At most one."
+        },
+        "detail": {
+          "type": "object:detail",
+          "doc": "A computed second line, such as a share of the whole."
+        },
+        "delta": {
+          "type": "object:delta",
+          "doc": "Change against a named comparison."
+        },
+        "spark": {
+          "type": "object:spark",
+          "doc": "A small trend line."
+        },
+        "status": {
+          "type": "object:status",
+          "doc": "Thresholds on the value. Shows a labelled status chip."
+        }
+      }
+    },
+    "detail": {
+      "fields": {
+        "value": {
+          "type": "scalar",
+          "required": true,
+          "doc": "A scalar."
+        },
+        "format": {
+          "type": "format",
+          "doc": "Number format. Default int."
+        },
+        "text": {
+          "type": "text",
+          "required": true,
+          "doc": "Words after the number, such as of all WIP."
+        }
+      }
+    },
+    "delta": {
+      "fields": {
+        "from": {
+          "type": "scalar",
+          "required": true,
+          "doc": "The comparison value. The change shown is value minus from."
+        },
+        "label": {
+          "type": "text",
+          "required": true,
+          "doc": "What it is compared with, such as vs last week."
+        },
+        "format": {
+          "type": "format",
+          "doc": "Default: the tile's format."
+        },
+        "good": {
+          "type": "enum:up|down|none",
+          "doc": "Which direction is good. Default none (shown neutral)."
+        }
+      }
+    },
+    "spark": {
+      "fields": {
+        "data": {
+          "type": "table",
+          "required": true,
+          "doc": "Table holding the trend."
+        },
+        "y": {
+          "type": "column",
+          "required": true,
+          "doc": "Column to draw, in row order."
+        }
+      }
+    },
+    "status": {
+      "fields": {
+        "field": {
+          "type": "column",
+          "doc": "Column to test. Default: the bar's value, or a histogram's bin start. Omit on a KPI tile."
+        },
+        "warning": {
+          "type": "number",
+          "doc": "Threshold for warning."
+        },
+        "serious": {
+          "type": "number",
+          "doc": "Threshold for serious."
+        },
+        "critical": {
+          "type": "number",
+          "doc": "Threshold for critical."
+        },
+        "direction": {
+          "type": "enum:above|below",
+          "doc": "Whether values above or below a threshold trigger it. Default above."
+        },
+        "strict": {
+          "type": "bool",
+          "doc": "true: a level applies only past its threshold, not at it. Default false (at or past)."
+        },
+        "labels": {
+          "type": "object",
+          "doc": "Words for each level used, such as {\"warning\": \"Above target band\"}. In a table column, normal names the rest."
+        }
+      }
+    },
+    "card": {
+      "fields": {
+        "title": {
+          "type": "text or view map",
+          "required": true,
+          "doc": "States the finding, not the measure. With a view switch, give {\"*\": default, \"view value\": text}."
+        },
+        "subtitle": {
+          "type": "text",
+          "doc": "Measure, unit and period."
+        },
+        "chart": {
+          "type": "chart",
+          "doc": "A chart. Give chart or table, not both."
+        },
+        "table": {
+          "type": "object:tableView",
+          "doc": "A table. Give chart or table, not both."
+        },
+        "note": {
+          "type": "text or view map",
+          "doc": "One line of context under the chart."
+        },
+        "source": {
+          "type": "text",
+          "doc": "Overrides meta.source for this card."
+        },
+        "asOf": {
+          "type": "text",
+          "doc": "Overrides meta.asOf for this card."
+        }
+      }
+    },
+    "bar": {
+      "fields": {
+        "type": {
+          "type": "enum:bar",
+          "required": true,
+          "doc": "Compare categories, or actual against target."
+        },
+        "data": {
+          "type": "table",
+          "required": true,
+          "doc": "Table to draw."
+        },
+        "x": {
+          "type": "column",
+          "required": true,
+          "doc": "Category column."
+        },
+        "y": {
+          "type": "column",
+          "required": true,
+          "doc": "Value column. Bars always start at zero."
+        },
+        "orient": {
+          "type": "enum:h|v",
+          "doc": "h (default) for categories, v for time buckets."
+        },
+        "xFormat": {
+          "type": "format",
+          "doc": "Format for x values, such as day or month. Default text."
+        },
+        "target": {
+          "type": "column or number",
+          "doc": "Target, drawn as a tick on each bar: a column, or one number for every bar."
+        },
+        "band": {
+          "type": "pair",
+          "doc": "[low column, high column] drawn as a shaded range behind each bar."
+        },
+        "highlight": {
+          "type": "any",
+          "doc": "Category or list of categories to draw in the accent, or max or min."
+        },
+        "status": {
+          "type": "object:status",
+          "doc": "Thresholds that colour bars and add a shape and a legend."
+        },
+        "sort": {
+          "type": "enum:none|desc|asc",
+          "doc": "Default none, which keeps row order."
+        },
+        "format": {
+          "type": "format",
+          "doc": "Number format. Default int."
+        },
+        "unit": {
+          "type": "text",
+          "doc": "Unit shown in tooltips."
+        },
+        "labels": {
+          "type": "object",
+          "doc": "Display names for columns, such as {\"wip\": \"WIP\"}. Use the keys band and target to name those marks."
+        }
+      }
+    },
+    "line": {
+      "fields": {
+        "type": {
+          "type": "enum:line",
+          "required": true,
+          "doc": "Change over time."
+        },
+        "data": {
+          "type": "table",
+          "required": true,
+          "doc": "Table to draw, rows in time order."
+        },
+        "x": {
+          "type": "column",
+          "required": true,
+          "doc": "Time or sequence column."
+        },
+        "y": {
+          "type": "columns",
+          "required": true,
+          "doc": "One to four value columns. The first is emphasised."
+        },
+        "band": {
+          "type": "pair",
+          "doc": "[low column, high column] drawn as a shaded range."
+        },
+        "target": {
+          "type": "column or number",
+          "doc": "A reference line."
+        },
+        "zero": {
+          "type": "bool",
+          "doc": "Force the value axis to include zero."
+        },
+        "colors": {
+          "type": "enum:emphasis|categorical",
+          "doc": "emphasis (default): first series accent, others grey. categorical: one hue each."
+        },
+        "annotate": {
+          "type": "annotations",
+          "doc": "Marked moments: [{\"x\": value, \"text\": \"words\"}]."
+        },
+        "xFormat": {
+          "type": "format",
+          "doc": "Format for x values. Default text."
+        },
+        "format": {
+          "type": "format",
+          "doc": "Number format. Default int."
+        },
+        "unit": {
+          "type": "text",
+          "doc": "Unit shown in tooltips."
+        },
+        "labels": {
+          "type": "object",
+          "doc": "Display names for columns. Use the keys band and target to name those marks."
+        }
+      }
+    },
+    "histogram": {
+      "fields": {
+        "type": {
+          "type": "enum:histogram",
+          "required": true,
+          "doc": "Shape of a distribution. Feed it a bin pipeline."
+        },
+        "data": {
+          "type": "table",
+          "required": true,
+          "doc": "A table made with bin."
+        },
+        "x": {
+          "type": "column",
+          "required": true,
+          "doc": "Bin start column. Use lo."
+        },
+        "y": {
+          "type": "column",
+          "required": true,
+          "doc": "Count column. Use count."
+        },
+        "refs": {
+          "type": "refs",
+          "doc": "Vertical markers: [{\"x\": number, \"label\": \"words\"}]."
+        },
+        "status": {
+          "type": "object:status",
+          "doc": "Thresholds on the bin start that colour bins."
+        },
+        "xFormat": {
+          "type": "format",
+          "doc": "Format for bin edges. Default int."
+        },
+        "format": {
+          "type": "format",
+          "doc": "Number format for counts. Default int."
+        },
+        "unit": {
+          "type": "text",
+          "doc": "Unit of the counted thing, shown in tooltips."
+        },
+        "xUnit": {
+          "type": "text",
+          "doc": "Unit of the binned measure, such as days."
+        },
+        "labels": {
+          "type": "object",
+          "doc": "Display names for columns. The key bin names the bins in the table view."
+        }
+      }
+    },
+    "pareto": {
+      "fields": {
+        "type": {
+          "type": "enum:pareto",
+          "required": true,
+          "doc": "Which few contributors make up most of a total."
+        },
+        "data": {
+          "type": "table",
+          "required": true,
+          "doc": "Table to draw. Sorted for you, largest first."
+        },
+        "x": {
+          "type": "column",
+          "required": true,
+          "doc": "Contributor column."
+        },
+        "y": {
+          "type": "column",
+          "required": true,
+          "doc": "Value column."
+        },
+        "cut": {
+          "type": "number",
+          "doc": "Share at which to draw the cut line. Default 0.8."
+        },
+        "format": {
+          "type": "format",
+          "doc": "Number format. Default int."
+        },
+        "unit": {
+          "type": "text",
+          "doc": "Unit shown in tooltips."
+        },
+        "labels": {
+          "type": "object",
+          "doc": "Display names for columns."
+        }
+      }
+    },
+    "tableView": {
+      "fields": {
+        "data": {
+          "type": "table",
+          "required": true,
+          "doc": "Table to show."
+        },
+        "columns": {
+          "type": "list:object:column",
+          "required": true,
+          "doc": "Columns to show, in order."
+        },
+        "sort": {
+          "type": "text",
+          "doc": "Starting sort column. Prefix with - for descending."
+        },
+        "limit": {
+          "type": "number",
+          "doc": "Rows to show. A caption states how many were left out."
+        }
+      }
+    },
+    "column": {
+      "fields": {
+        "field": {
+          "type": "column",
+          "required": true,
+          "doc": "Column to show."
+        },
+        "label": {
+          "type": "text",
+          "doc": "Header text. Default: the column name in words."
+        },
+        "format": {
+          "type": "format",
+          "doc": "Number format. Numbers align right."
+        },
+        "unit": {
+          "type": "text",
+          "doc": "Unit added to the header in brackets."
+        },
+        "mono": {
+          "type": "bool",
+          "doc": "Monospace, for identifiers."
+        },
+        "status": {
+          "type": "object:status",
+          "doc": "Show a labelled status chip instead of the number."
+        }
+      }
+    }
+  }
+}

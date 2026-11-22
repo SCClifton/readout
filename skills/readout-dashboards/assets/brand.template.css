@@ -1,0 +1,81 @@
+/* Readout brand overlay template. base: soft
+   (Write "base: mono" above instead if the brand is black and white, and set data-style="mono" on the page's html element.)
+
+   How to use: copy this file, fill in the values, check it, then paste its contents into a page
+   between the readout:brand markers, wrapped as:
+       <style data-readout-brand="Name"> ... </style>
+
+   Rules
+   - Colours are six-digit hex, so they can be checked.
+   - Fonts must already be installed on the reader's machine. No @font-face, no url(), no @import.
+   - Status colours and the data palette are fixed. They do not belong in a brand overlay.
+   - Delete any line you are not changing. An empty overlay is a valid overlay.
+
+   Check it: node scripts/check.js --brand this-file.css
+   With no node, open a page that uses it: the page checks the overlay's contrast itself.
+
+   The selectors repeat :root on purpose. That is what lets an overlay win over every built-in theme. */
+
+/* 1. Type and shape. The same in light and dark. */
+:root:root:root:root {
+  --ro-font: "Brand Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --ro-radius-card: 14px;      /* 0px for square, 6px for tight, 14px for soft */
+  --ro-radius-control: 10px;
+  --ro-radius-chip: 999px;
+  --ro-card-border: 0px;       /* 1px draws an outline round every card */
+}
+
+/* 2. Light mode. Each line states the contrast the role must reach. */
+:root:root:root:root {
+  --ro-accent: #2964c6;        /* fill of selected controls: 3:1 on page and card */
+  --ro-on-accent: #ffffff;     /* text on that fill: 4.5:1 */
+  --ro-accent-text: #2964c6;   /* links and focus rings: 4.5:1 on page, card and accent-soft */
+  --ro-accent-soft: #e1ecfe;   /* tint behind selected items and callouts */
+  --ro-emphasis: #2964c6;      /* the one highlighted bar or line: 3:1 on card */
+  /* Neutrals, only if the brand has its own greys:
+  --ro-page: #f3f5f8;          the page behind the cards
+  --ro-card: #ffffff;          cards, tiles and the chart surface
+  --ro-fill: #eef0f3;          control tracks and quiet fills
+  --ro-raised: #ffffff;        tooltips
+  --ro-text: #0d1219;          primary ink: 4.5:1 on all four surfaces
+  --ro-_text-2: #4f5359;       secondary ink: 4.5:1 on all four surfaces
+  --ro-_text-3: #696c71;       captions and axis labels: 4.5:1 on all four surfaces
+  --ro-_hairline: #e4e6e9;     dividers and gridlines
+  --ro-_border: #d9dbde;       control and card outlines
+  --ro-border-strong: #83868b; chart baselines: 3:1 on page and card
+  --ro-neutral: #83868b;       ordinary bars and lines: 3:1 on card
+  --ro-neutral-2: #bbbec1;     context series
+  --ro-band: #e4e6e9;          target bands
+  --ro-marking: #0d1219;       banner fill
+  --ro-on-marking: #ffffff;    banner text: 4.5:1 */
+}
+
+/* 3. Dark mode. The same roles, re-stepped for a dark surface: lighter accents, not the light values.
+      The two blocks below must hold identical values. */
+@media (prefers-color-scheme: dark) {
+  :root:root:root:root:not([data-theme="light"]) {
+    --ro-accent: #3570d3;
+    --ro-on-accent: #ffffff;
+    --ro-accent-text: #5290f6;
+    --ro-accent-soft: #082047;
+    --ro-emphasis: #4683e8;
+  }
+}
+:root:root:root:root[data-theme="dark"] {
+  --ro-accent: #3570d3;
+  --ro-on-accent: #ffffff;
+  --ro-accent-text: #5290f6;
+  --ro-accent-soft: #082047;
+  --ro-emphasis: #4683e8;
+}
+
+/* 4. Print always uses the light values. Repeat block 2's colours here. */
+@media print {
+  :root:root:root:root:root {
+    --ro-accent: #2964c6;
+    --ro-on-accent: #ffffff;
+    --ro-accent-text: #2964c6;
+    --ro-accent-soft: #e1ecfe;
+    --ro-emphasis: #2964c6;
+  }
+}

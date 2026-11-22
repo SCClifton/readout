@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" data-style="soft" data-density="comfortable">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-{{HASH}}'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<title>{{TITLE}}</title>
+<!-- Readout {{VERSION}}. Edit the title above, and between the "readout:layout" and "readout:data" markers.
+     The style and script blocks are generated single lines: do not print, read or edit them.
+     Find the regions with: grep -n '^<!-- readout:' thisfile.html -->
+<style id="readout-css">{{CSS}}</style>
+<!-- readout:brand:start (optional: one style block holding a brand overlay) -->
+<!-- readout:brand:end -->
+</head>
+<body>
+<!-- readout:layout:start -->
+{{LAYOUT}}
+<!-- readout:layout:end -->
+<!-- readout:data:start -->
+<script type="application/json" id="readout-data">
+{{DATA}}
+</script>
+<!-- readout:data:end -->
+<script>{{JS}}</script>
+</body>
+</html>

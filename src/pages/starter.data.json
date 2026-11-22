@@ -1,0 +1,29 @@
+{
+ "meta": { "title": "Orders", "subtitle": "Sample page. Replace every value in this block.", "asOf": "2026-01-31", "source": "Sample data", "marking": "Sample data" },
+ "data": {
+  "monthly": { "cols": ["month", "orders", "target"], "rows": [
+   ["2025-06", 410, 400], ["2025-07", 432, 410], ["2025-08", 428, 420], ["2025-09", 455, 430],
+   ["2025-10", 471, 440], ["2025-11", 468, 450], ["2025-12", 502, 460], ["2026-01", 529, 470]] },
+  "regions": { "cols": ["region", "orders", "target"], "rows": [["North", 188, 150], ["East", 142, 130], ["South", 121, 120], ["West", 78, 70]] }
+ },
+ "derive": {
+  "regionCalc": { "from": "regions", "add": { "gap": ["sub", "orders", "target"], "attain": ["div", "orders", "target"] }, "sort": "-orders" }
+ },
+ "kpis": {
+  "latest": { "label": "Orders this month", "value": ["last", "monthly.orders"], "unit": "orders", "hero": true,
+   "delta": { "from": ["prev", "monthly.orders"], "label": "vs last month", "good": "up" }, "spark": { "data": "monthly", "y": "orders" } },
+  "attain": { "label": "Against target", "value": ["div", ["last", "monthly.orders"], ["last", "monthly.target"]], "format": "pct0",
+   "detail": { "value": ["last", "monthly.target"], "text": "orders targeted" } },
+  "total": { "label": "Orders, last 8 months", "value": ["sum", "monthly.orders"], "unit": "orders" }
+ },
+ "cards": {
+  "trend": { "title": "Orders have beaten target for eight months", "subtitle": "Orders per month against target",
+   "chart": { "type": "line", "data": "monthly", "x": "month", "y": "orders", "target": "target", "xFormat": "month", "unit": "orders" } },
+  "byRegion": { "title": "North leads every region", "subtitle": "Orders this month by region, against target",
+   "chart": { "type": "bar", "data": "regionCalc", "x": "region", "y": "orders", "target": "target", "highlight": "max", "unit": "orders" } },
+  "detail": { "title": "Every region is at or above target", "subtitle": "Orders and target by region, this month",
+   "table": { "data": "regionCalc", "columns": [
+    { "field": "region" }, { "field": "orders", "format": "int" }, { "field": "target", "format": "int" },
+    { "field": "gap", "label": "Above target", "format": "int" }, { "field": "attain", "label": "Share of target", "format": "pct0" }] } }
+ }
+}

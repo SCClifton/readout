@@ -1,0 +1,14 @@
+{
+  "name": "readout",
+  "description": "Readout, a dashboard design system and theme set packaged as a skill for Claude.",
+  "owner": {
+    "name": "Readout"
+  },
+  "plugins": [
+    {
+      "name": "readout",
+      "source": "./",
+      "description": "A dashboard design system and theme set for Claude: calm, typographic, accessible dashboards as single HTML files with no dependencies and no network access."
+    }
+  ]
+}
